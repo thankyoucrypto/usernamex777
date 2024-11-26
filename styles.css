@@ -1,0 +1,320 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ff99;
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+
+
+
+
+
+
+/* Стили для экрана загрузки */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Темный фон */
+  color: #00ff99; /* Цвет текста */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+  flex-direction: column; /* Вертикальное расположение элементов */
+  z-index: 1000; /* Показываем поверх всего */
+  opacity: 1;
+  transition: opacity 1s ease-in-out; /* Плавное исчезновение */
+}
+
+/* Прогресс-бар */
+#loading-screen .progress-bar-container {
+  width: 60%; /* Оставляем ширину на больших экранах */
+  height: 5px;
+  background: #444;
+  border-radius: 2px;
+  margin-bottom: 20px; /* Отступ между полосой загрузки и текстом */
+}
+
+/* Прогресс */
+#loading-screen .progress {
+  height: 100%;
+  width: 0%;
+  background: #00ff99;
+  border-radius: 2px;
+  animation: loadingProgress 2s infinite;
+}
+
+/* Текст загрузки */
+#loading-screen .loading-text {
+  font-size: 1.5rem; /* Размер текста на больших экранах */
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: fadeIn 0.8s ease-in-out;
+  color: #00ff99; /* Цвет текста */
+  text-align: center; /* Выравнивание текста по центру */
+}
+
+/* Анимация прогресс-бара */
+@keyframes loadingProgress {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Плавное исчезновение загрузки */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  #loading-screen .progress-bar-container {
+    width: 80%; /* Увеличиваем ширину прогресс-бара для мобильных */
+  }
+
+  #loading-screen .loading-text {
+    font-size: 1rem; /* Меньше шрифт на мобильных */
+    letter-spacing: 0.5px; /* Уменьшаем интервал между буквами */
+    margin-top: 10px; /* Отступ сверху для текста */
+  }
+}
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Затемнение для читаемости текста */
+  z-index: -1;
+}
+
+.content {
+  display: none; /* Контент скрыт по умолчанию */
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Typing Effect */
+#typed-text {
+display: inline-block; /* Чтобы курсор позиционировался относительно текста */
+  white-space: nowrap; /* Текст не переносится на новую строку */
+  font-size: 3rem; /* Большой размер для десктопов */
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #00ff99;
+  margin: 20px auto;
+  animation: blink 0.5s step-end infinite;
+}
+#typed-text::after {
+    display: inline-block; /* Чтобы курсор позиционировался относительно текста */
+  animation: blink 0.8s step-end infinite; /* Анимация мигания курсора */
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Стили для подзаголовка с эффектом глитча */
+.sub-glitch {
+  font-size: 1.5rem; /* Размер шрифта для основного текста, уменьшен для лучшей интеграции */
+  font-weight: bold;
+  color: #fff; /* Цвет основного текста */
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 20px 0;
+  animation: glitch-animation 1.5s infinite linear alternate; /* Анимация эффекта глитча */
+}
+
+/* Стили для текста внутри <span> */
+.sub-glitch span {
+  color: #00ff99; /* Цвет для выделенной части текста */
+  position: relative;
+  z-index: 1;
+  animation: glitch-span 1.5s infinite linear alternate; /* Анимация для выделенного текста */
+}
+
+/* Анимация эффекта глитча для основного текста */
+@keyframes glitch-animation {
+  0% {
+    text-shadow: 2px 2px 3px rgba(0, 255, 153, 0.5), -2px -2px 3px rgba(0, 255, 153, 0.5);
+    transform: translate(0);
+  }
+  25% {
+    text-shadow: 3px 3px 2px rgba(0, 255, 153, 0.6), -3px -3px 2px rgba(0, 255, 153, 0.6);
+    transform: translate(-3px, 2px);
+  }
+  50% {
+    text-shadow: 4px 4px 2px rgba(0, 255, 153, 0.7), -4px -4px 2px rgba(0, 255, 153, 0.7);
+    transform: translate(-2px, -2px);
+  }
+  75% {
+    text-shadow: 5px 5px 3px rgba(0, 255, 153, 0.8), -5px -5px 3px rgba(0, 255, 153, 0.8);
+    transform: translate(3px, -3px);
+  }
+  100% {
+    text-shadow: 2px 2px 3px rgba(0, 255, 153, 0.5), -2px -2px 3px rgba(0, 255, 153, 0.5);
+    transform: translate(0);
+  }
+}
+
+/* Анимация для <span>, имитирующая глитч */
+@keyframes glitch-span {
+  0% {
+    text-shadow: 2px 2px 3px rgba(0, 255, 153, 0.5), -2px -2px 3px rgba(0, 255, 153, 0.5);
+    transform: translate(0);
+  }
+  50% {
+    text-shadow: 5px 5px 3px rgba(0, 255, 153, 0.7), -5px -5px 3px rgba(0, 255, 153, 0.7);
+    transform: translate(-3px, 2px);
+  }
+  100% {
+    text-shadow: 2px 2px 3px rgba(0, 255, 153, 0.5), -2px -2px 3px rgba(0, 255, 153, 0.5);
+    transform: translate(0);
+  }
+}
+
+/* Адаптивные стили для мобильных */
+@media (max-width: 768px) {
+  .sub-glitch {
+    font-size: 1.2rem; /* Уменьшаем размер шрифта на мобильных */
+    margin: 15px 0;
+  }
+
+  .sub-glitch span {
+    font-size: 1.2rem; /* Размер текста внутри span тоже уменьшаем */
+  }
+}
+
+
+/* Skills Section */
+.skills ul {
+  list-style: none;
+  text-align: left;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0;
+}
+
+.skills li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid rgba(0, 255, 153, 0.5);
+  border-radius: 5px;
+  background: rgba(0, 255, 153, 0.1);
+  color: #00ff99;
+  text-transform: uppercase;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.skills li:hover {
+  background: rgba(0, 255, 153, 0.3);
+  transform: scale(1.05);
+}
+
+/* Contact Section */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  text-decoration: none;
+  color: #00ff99;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #00ff99;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #00ff99;
+  color: black;
+}
+
+/* Footer */
+footer {
+  margin-top: 30px;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #ff0088;
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  #typed-text {
+    font-size: 1.5rem; /* Уменьшаем шрифт на телефонах */
+    white-space: normal; /* Разрешаем перенос строк */
+    margin: 10px auto;
+  }
+
+  .skills ul {
+    padding: 0 10px;
+  }
+
+  .skills li {
+    margin: 8px 0;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .social-link {
+    padding: 10px;
+    font-size: 0.9rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+  }
+}
