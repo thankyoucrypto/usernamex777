@@ -83,3 +83,11 @@ window.addEventListener("resize", () => {
   const target = document.getElementById("typed-text");
   target.style.fontSize = window.innerWidth < 768 ? "1.5rem" : "3rem";
 });
+
+// Для управления классом .open при клике описания
+function toggleDescription(element) {
+  const description = element.querySelector('.description');
+  if (description) {
+    description.classList.toggle('open');
+  }
+}
