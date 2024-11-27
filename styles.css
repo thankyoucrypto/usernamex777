@@ -232,6 +232,7 @@ display: inline-block; /* Чтобы курсор позиционировалс
 }
 
 .skills li {
+  position: relative;
   margin: 10px 0;
   padding: 10px;
   border: 1px solid rgba(0, 255, 153, 0.5);
@@ -240,11 +241,29 @@ display: inline-block; /* Чтобы курсор позиционировалс
   color: #00ff99;
   text-transform: uppercase;
   transition: transform 0.3s ease, background 0.3s ease;
+  cursor: pointer;
 }
 
 .skills li:hover {
   background: rgba(0, 255, 153, 0.3);
   transform: scale(1.05);
+}
+
+.skills .description {
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(0, 255, 153, 0.05);
+  color: #00ff99;
+  font-size: 0.9em;
+  margin-top: 5px;
+  padding: 0 10px;
+  border-top: 1px solid rgba(0, 255, 153, 0.5);
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.skills .description.open {
+  max-height: 100px; /* Adjust for larger content */
+  padding: 10px;
 }
 
 /* Contact Section */
